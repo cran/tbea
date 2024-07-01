@@ -1,6 +1,6 @@
 Package: tbea
 Title: Pre- And Post-Processing in Bayesian Evolutionary Analyses
-Version: 1.4.2
+Version: 1.5.0
 Authors@R: c(person("Gustavo A.", "Ballen", email = "gustavo.a.ballen@gmail.com", role = c("aut", "cre")), 
     person("Sandra", "Reinales", email = "spreinalesl@gmail.com", role = c("aut")))
 Description: Functions are provided for prior specification in divergence time
@@ -29,9 +29,9 @@ Suggests: testthat (>= 3.0.0), knitr, rmarkdown
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2024-06-03 17:33:06 UTC; balleng
+Packaged: 2024-07-01 15:57:00 UTC; balleng
 Author: Gustavo A. Ballen [aut, cre],
   Sandra Reinales [aut]
 Maintainer: Gustavo A. Ballen <gustavo.a.ballen@gmail.com>
 Repository: CRAN
-Date/Publication: 2024-06-04 10:20:03 UTC
+Date/Publication: 2024-07-01 16:20:01 UTC
