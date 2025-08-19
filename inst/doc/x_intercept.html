@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Gustavo A. Ballen and Sandra Reinales" />
+
+<meta name="date" content="2025-08-19" />
+
+<title>Inference using x-intercept methods</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Inference using x-intercept methods</h1>
+<h4 class="author">Gustavo A. Ballen and Sandra Reinales</h4>
+<h4 class="date">2025-08-19</h4>
+
+
+
+<p>These approaches are based on the assumption that the cumulative the
+pattern of appearance of divergence time events from an unknown time
+<span class="math inline">\(t_0\)</span> onwards can inform on the event
+time. A regression model with an additional parameter <span class="math inline">\(x\)</span>-intercept may be thought of as an
+estimator for such point in time given the trend present in the linear
+model. Estimation of uncertainty regions such as confidence intervals on
+the <span class="math inline">\(x\)</span>-intercept can be even more
+useful than the point estimate itself; such regions can be constructed
+by fitting an empirical cumulative density function.</p>
+<p>Events in time start at some unobserved point and their realisations
+continue until the process finishes. Because they are delayed by some
+quantity after the generator process starts, we can use the pattern of
+occurrence in time in order to estimate the origination time. They can
+be described as a distribution regardless of its generator process,
+which will follow a probability density function (PDF) <span class="math inline">\(f(t)\)</span>, with an associated cumulative
+density function (CDF) <span class="math inline">\(P(X &lt; x)\)</span>.
+We can fit an empirical CDF and then use a linear regression model. The
+only case where a CDF would be truly linear would be in the case of a
+uniform distribution where <span class="math display">\[P(X \leq x) =
+\frac{x}{b - a} \mathrm{\ for\ } x \in [a,b]\]</span> which implies that
+the empirical data in time follow a uniform distribution. For any other
+case, a fitted CDF would be a non-linear, and thus a linearisation
+should be applied to it.</p>
+<p>There are several methods available for linearising data (e.g.,
+applying the logarithm, the square and cubic roots, the arcsine, or the
+reciprocal to the raw data). In the case of CDF fitting, we need to
+guarantee that the data are linear regardless of the PDF in order to
+estimate parameters of the model and thus the procedure is appropriate.
+After model fitting, a back transformation would be necessary for
+representing the time value of interest in real space.</p>
+<p>The linear model has the form <span class="math display">\[y = m x +
+b\]</span> where <span class="math inline">\(m\)</span> is the slope and
+<span class="math inline">\(b\)</span> is the <span class="math inline">\(y\)</span>-intercept. However, we are not
+interested in any of these parameters but instead in a third one, the
+<span class="math inline">\(x\)</span>-intercept, that is defined as the
+point in <span class="math inline">\(x\)</span> where <span class="math inline">\(y = 0\)</span>. This parameter can be defined by
+letting <span class="math inline">\(y = 0\)</span> in the equation and
+thus <span class="math display">\[x_{y = 0} = -\frac{b}{m}\]</span>
+allows us to find the point at which the data began to be generated.</p>
+<p>Several methods have been proposed for estimating the uncertainty on
+the <span class="math inline">\(x\)</span>-intercept estimate, from the
+intuitive inverse regression <span class="math inline">\(X \sim
+Y\)</span> to bootstraping methods. According to Seber and Lee (2013)<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> this
+problem has long been discussed in the statistical literature without
+much consensus, although some are of interest due to theoretical appeal,
+ease of implementation, or simplification of assumptions. Uncertainty on
+the estimate of the <span class="math inline">\(x\)</span>-intercept can
+be obtained through Taylor series simplification <span class="math display">\[\left(\frac{\sigma_X}{X}\right)^2 =
+\left(\frac{\sigma_a}{a}\right)^2 + \left(\frac{\sigma_b}{b}\right)^2 +
+2 \left(\frac{\sigma_a}{a}\right) \left(\frac{\sigma_b}{b}\right)
+\rho_{ab}\]</span> for symmetric intervals.</p>
+<p>Another approach by Draper and Smith (1998)<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> allows the calculation
+asymmetric confidence intervals by projecting the values of the
+confidence region around the linear model on the <span class="math inline">\(x\)</span>-axis by manipulation of the curves
+describing the confidence region, what gives <span class="math display">\[CI_{X_{0}} = \hat{X_0} + \frac{(X_0 - \bar{X}) g
+\pm (t s / b_1) {\{[{(\hat{X_0} - \bar{X})}^2 S_{XX}] + (1 - g) /
+n\}}^{1/2}}{1 - g}\]</span> where <span class="math inline">\(g = t^2
+s^2 / (b_1^2 / {S_{XX}})\)</span>, <span class="math inline">\(b_1\)</span> is the slope, <span class="math inline">\(S_{XX}\)</span> is the sum of squares of <span class="math inline">\(X\)</span>, <span class="math inline">\(t\)</span>
+is the <span class="math inline">\(t\)</span>-statistic with n-2 degrees
+of freedom and at <span class="math inline">\(1 - \alpha/2\)</span>
+significance level, <span class="math inline">\(s^2\)</span> is the
+standard deviation, <span class="math inline">\(\hat{X_0}\)</span> is
+the estimation of the <span class="math inline">\(x\)</span>-intercept,
+and <span class="math inline">\(\bar{X}\)</span> is the mean of <span class="math inline">\(X\)</span>. Here we need to fit a linear model in
+order to use the curves for the confidence region, and we can use
+classical least square models or robust non-parametric regression Kloke
+and McKean (2014)<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<p>It is also possible to use bootstrapping in order to estimate the
+variance and thus the confidence interval in asymmetric cases such as
+this one. Instead of using the estimates from a single fitted model on
+the coordinates of the empirical CDF, this method fits multiple models
+with random subsamples in order to construct a collection of estimated
+values the <span class="math inline">\(x\)</span>-intercept and this
+provides a confidence interval.</p>
+<p>The package <code>tbea</code> implements estimation of the confidence
+interval for the <span class="math inline">\(x-\)</span>intercept using
+the method of Draper and Smith (1998) as well as estimation via
+bootstrap. Both require a linear model which can be set to one of the
+following: either ordinary least squares, or a robust linear model Kloke
+and McKean (2014).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># load the package</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(tbea)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># load the data</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">data</span>(andes)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>ages <span class="ot">&lt;-</span> andes<span class="sc">$</span>ages</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>ages <span class="ot">&lt;-</span> ages[<span class="fu">complete.cases</span>(ages)] <span class="co"># remove NAs</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>ages <span class="ot">&lt;-</span> ages[<span class="fu">which</span>(ages <span class="sc">&lt;</span> <span class="dv">10</span>)] <span class="co"># remove outliers</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="co"># Draper-Smith, OLS</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>draperSmithNormalX0 <span class="ot">&lt;-</span> <span class="fu">xintercept</span>(<span class="at">x=</span>ages, <span class="at">method=</span><span class="st">&quot;Draper-Smith&quot;</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>                                  <span class="at">alpha=</span><span class="fl">0.05</span>, <span class="at">robust=</span><span class="cn">FALSE</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="co"># Draper-Smith, Robust fit</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>draperSmithRobustX0 <span class="ot">&lt;-</span><span class="fu">xintercept</span>(<span class="at">x=</span>ages, <span class="at">method=</span><span class="st">&quot;Draper-Smith&quot;</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>                                 <span class="at">alpha=</span><span class="fl">0.05</span>, <span class="at">robust=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="co"># bootstrap, OLS</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>bootstrapNormalX0 <span class="ot">&lt;-</span> <span class="fu">xintercept</span>(<span class="at">x=</span>ages, <span class="at">method=</span><span class="st">&quot;Bootstrap&quot;</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>                                <span class="at">p=</span><span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), <span class="at">robust=</span><span class="cn">FALSE</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="co"># bootstrap, Robust fit</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>bootstrapRobustX0 <span class="ot">&lt;-</span> <span class="fu">xintercept</span>(<span class="at">x=</span>ages, <span class="at">method=</span><span class="st">&quot;Bootstrap&quot;</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>                                <span class="at">p=</span><span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), <span class="at">robust=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a><span class="co"># plot the estimations</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a><span class="fu">hist</span>(ages, <span class="at">probability=</span><span class="cn">TRUE</span>,</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="at">red=</span><span class="dv">0</span>, <span class="at">green=</span><span class="dv">0</span>, <span class="at">blue=</span><span class="dv">1</span>, <span class="at">alpha=</span><span class="fl">0.3</span>),</span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">main=</span><span class="st">&quot;CDF-based on confidence intervals&quot;</span>,</span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Age (Ma)&quot;</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a><span class="co"># plot the lines for the estimator of Draper and Smith using lm</span></span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a><span class="fu">arrows</span>(<span class="at">x0=</span>draperSmithNormalX0<span class="sc">$</span>ci[<span class="st">&quot;upper&quot;</span>], <span class="at">y0=</span><span class="fl">0.025</span>,</span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a>       <span class="at">x1=</span>draperSmithNormalX0<span class="sc">$</span>ci[<span class="st">&quot;lower&quot;</span>], <span class="at">y1=</span><span class="fl">0.025</span>,</span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>       <span class="at">code=</span><span class="dv">3</span>, <span class="at">angle=</span><span class="dv">90</span>, <span class="at">length=</span><span class="fl">0.1</span>, <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">col=</span><span class="st">&quot;darkblue&quot;</span>)</span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a><span class="co"># plot the lines for the estimator of Draper and Smith using rfit</span></span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a><span class="fu">arrows</span>(<span class="at">x0=</span>draperSmithRobustX0<span class="sc">$</span>ci[<span class="st">&quot;upper&quot;</span>], <span class="at">y0=</span><span class="fl">0.05</span>,</span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a>       <span class="at">x1=</span>draperSmithRobustX0<span class="sc">$</span>ci[<span class="st">&quot;lower&quot;</span>], <span class="at">y1=</span><span class="fl">0.05</span>,</span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a>       <span class="at">code=</span><span class="dv">3</span>, <span class="at">angle=</span><span class="dv">90</span>, <span class="at">length=</span><span class="fl">0.1</span>,</span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a>       <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">col=</span><span class="st">&quot;darkgreen&quot;</span>)</span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a><span class="co"># plot the lines for the estimator based on bootstrap</span></span>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a><span class="fu">arrows</span>(<span class="at">x0=</span>bootstrapRobustX0<span class="sc">$</span>ci[<span class="st">&quot;upper&quot;</span>], <span class="at">y0=</span><span class="fl">0.075</span>,</span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a>       <span class="at">x1=</span>bootstrapRobustX0<span class="sc">$</span>ci[<span class="st">&quot;lower&quot;</span>], <span class="at">y1=</span><span class="fl">0.075</span>,</span>
+<span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a>       <span class="at">code=</span><span class="dv">3</span>, <span class="at">angle=</span><span class="dv">90</span>, <span class="at">length=</span><span class="fl">0.1</span>,</span>
+<span id="cb1-47"><a href="#cb1-47" tabindex="-1"></a>       <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">col=</span><span class="st">&quot;darkred&quot;</span>)</span>
+<span id="cb1-48"><a href="#cb1-48" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" tabindex="-1"></a><span class="co"># plot a legend</span></span>
+<span id="cb1-50"><a href="#cb1-50" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x=</span><span class="st">&quot;topright&quot;</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;Draper and Smith with lm&quot;</span>,</span>
+<span id="cb1-51"><a href="#cb1-51" tabindex="-1"></a>                              <span class="st">&quot;Draper and Smith with rfit&quot;</span>,</span>
+<span id="cb1-52"><a href="#cb1-52" tabindex="-1"></a>                              <span class="st">&quot;Bootstrap on x0&quot;</span>),</span>
+<span id="cb1-53"><a href="#cb1-53" tabindex="-1"></a>       <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;darkblue&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>, <span class="st">&quot;darkred&quot;</span>),</span>
+<span id="cb1-54"><a href="#cb1-54" tabindex="-1"></a>       <span class="at">lty=</span><span class="dv">1</span>, <span class="at">lwd=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>Both methods produce similar results. Although the method based on
+robust regression produced a CI wider than the one based on ordinary
+least squares, the bootstrap CI estimate was as wide as the two former
+combined. The fact that the bootstraping based on robust estimates is of
+more general application, it seems more adequate for these situations.
+It is noteworthy that these inferences are based on the assumption that
+the events in time are measured without error. However, this assumption
+relaxes due to the effect of re-sampling and uncertainty in the
+estimates. According to both estimators, the separation between cis- and
+trans-Andean areas took place between ca. <span class="math inline">\(4.3-5.8\)</span> Ma.</p>
+<p>These methods have produced results in line with those based on
+stratigraphic intervals. However, they allow estimate <span class="math inline">\(x\)</span>-intercepts and consequently their
+confidence intervals that are not necessarily older than the oldest
+divergence time estimation event. Thus, they are robust to the
+assumption of measurement without error that is implicit in
+stratigraphic interval methods. Nevertheless, they are still sensitive
+to the presence of strong outliers as preliminary analyses showed that
+the regressions on these data with outliers affected strongly the robust
+regressions.</p>
+<div class="footnotes footnotes-end-of-document">
+<hr />
+<ol>
+<li id="fn1"><p>Seber, G.A.F. and Lee, A.J. (2013). Linear Regression
+Analysis. Wiley Interscience, Hoboken, NJ, 2nd edition.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Draper, N.R. and Smith, H. (1998). Applied Regression
+Analysis. Wiley Interscience, New York.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Kloke, J.D. and McKean, J.W. (2012). Rfit: Rank-based
+estimation for linear models. The R Journal, 4(2):57-64.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Gustavo A. Ballen and Sandra Reinales" />
+
+<meta name="date" content="2025-08-19" />
+
+<title>Stratigraphic intervals</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Stratigraphic intervals</h1>
+<h4 class="author">Gustavo A. Ballen and Sandra Reinales</h4>
+<h4 class="date">2025-08-19</h4>
+
+
+
+<p>Some methods are available for estimating the confidence intervals on
+the extreme points of a stratigraphic interval, i.e., an estimate for
+the point of appearance and disappearance of a given taxon in geologic
+time. These methods are relevant here since we can think of a
+biogeographic events in the same way as taxa appear and become extinct.
+This approach is lacking in historical biogeography as far as we know,
+and seems to fit the main goal of determining the final point of
+connection between biogeographic areas. Marshall (2010)<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> summarised different
+approaches for estimating confidence intervals under certain sampling
+regimes, assumptions and confidence levels, ranging from classical to
+Bayesian estimators. The package <code>tbea</code> implements two of
+these methods, the classical (Strauss and Sadler, 1989)<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> and the
+distribution-free estimator of Marshall (1994)<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<p>The first method provides estimators where one- (<span class="math inline">\(\theta_{1}\)</span>) or two-parameter (<span class="math inline">\(\theta_{1}, \theta_{2}\)</span>) cases are
+constructed adding and subtracting a portion <span class="math inline">\(\alpha\)</span> of the magnitude of the observed
+stratigraphic interval <span class="math inline">\([y, z]\)</span>. Such
+constant depends on the confidence level wanted (e.g., <span class="math inline">\(95%\)</span>).</p>
+<p>The second method of distribution-free confidence intervals was
+developed without assuming any particular distribution of underlying gap
+sizes, instead, it calculates quantiles of gap size between occurrence
+points for an ordered vector of gap sizes. The major cost is that such
+intervals are larger that classical CIs and on the other hand, require
+much more data for constructing intervals of high confidence (e.g.,
+<span class="math inline">\(95%\)</span>).</p>
+<p>The method makes use of the binomial distribution in order to find
+the quantiles that satisfy the condition of being smaller that <span class="math inline">\(\gamma\)</span> and from these picking the largest
+(in the case of the lower bound) and the smallest (for the upper bound).
+Marshall (1994) mentioned that inference using his method is only valid
+as long as there is no trend in gap size (i.e., a trend of increase or
+decrease in gap size as we go along the time data). It is possible to
+use the Mann-Kendall test for monotonic trend to test such assumption.
+Because the method works with quantiles of the sorted gap sizes, these
+are first calculated from the sorted vector of times, but then
+internally sorted when using the method “Marshall94”; however, whether
+there is any monotonic trend must be assessed on the unsorted version.
+We use the Mann-Kendall test on the times vector prior to applying the
+function:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># load the packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(Kendall)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(tbea)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co"># load the data</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">data</span>(andes)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>andes <span class="ot">&lt;-</span> andes<span class="sc">$</span>ages</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="co"># remove missing data</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>andes <span class="ot">&lt;-</span> andes[<span class="fu">complete.cases</span>(andes)]</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="co"># remove outliers</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>andes <span class="ot">&lt;-</span> <span class="fu">sort</span>(andes[<span class="fu">which</span>(andes <span class="sc">&lt;</span> <span class="dv">10</span>)])</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>gapsizes <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(andes), <span class="at">FUN=</span><span class="cf">function</span>(x) andes[x] <span class="sc">-</span> andes[x<span class="dv">-1</span>])</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="co"># run the Mann-Kendall test </span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="fu">MannKendall</span>(gapsizes)</span></code></pre></div>
+<pre><code>## tau = 0.119, 2-sided pvalue =0.27337</code></pre>
+<p>We fail to reject the null hypothesis of no monotonic trend in the
+gap sizes. Therefore we may apply the “Marshall94” method for bracketing
+the confidence interval.</p>
+<p>These two methods are available in the function <code>stratCI</code>
+which allows to pick one of two methods: “StraussSadler89” or
+“Marshall94”. We can use the same data from the previous block in order
+to illustrate the usage of the function <code>stratCI</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># calculate the older theta that is an extension beyond</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co"># the oldest (first from past to present) occurrence</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co"># using the method Strauss-Sadler89</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="fu">stratCI</span>(<span class="at">times=</span>andes, <span class="at">method=</span><span class="st">&quot;Strauss-Sadler89&quot;</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>        <span class="at">nparams=</span><span class="st">&quot;one.par&quot;</span>, <span class="at">C=</span><span class="fl">0.95</span>, <span class="at">endpoint=</span><span class="st">&quot;first&quot;</span>)</span></code></pre></div>
+<pre><code>##     minObs     maxObs     maxEst          H     alphaR      alpha 
+##  0.2749000  6.9500000  7.4435055 43.0000000  0.4935055  0.0739323</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># calculate the lower and upper bounds on the confidence interval with a quantile 0.8</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">stratCI</span>(<span class="at">times=</span>andes, <span class="at">method=</span><span class="st">&quot;Marshall94&quot;</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>        <span class="at">confidence=</span><span class="fl">0.95</span>, <span class="at">quantile=</span><span class="fl">0.8</span>)</span></code></pre></div>
+<pre><code>## [1] 7.0701 7.2147</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">stratCI</span>(<span class="at">times=</span>andes, <span class="at">method=</span><span class="st">&quot;Marshall94&quot;</span>,</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>        <span class="at">confidence=</span><span class="fl">0.95</span>, <span class="at">quantile=</span><span class="fl">0.95</span>)</span></code></pre></div>
+<pre><code>## Warning in .upperBound(confidence, length(gapsizes), quantile): Impossible to
+## calculate upper bound</code></pre>
+<pre><code>## [1] 7.14   NA</code></pre>
+<p>As Marshall (1994) already noted, the method requires a large number
+of gaps to calculate both bounds for the <span class="math inline">\(95%\)</span> confidence interval; for our dataset
+with just <span class="math inline">\(42\)</span> gaps (i.e., <span class="math inline">\(43\)</span> times), we can find both bounds at the
+<span class="math inline">\(80%\)</span> confidence level (or lower),
+and thus claim that the lower and upper bounds for the <span class="math inline">\(95%\)</span> confidence interval are <span class="math inline">\(7.07-7.2\)</span> Ma. When we raise the confidence
+level to <span class="math inline">\(95%\)</span>, we can only infer the
+lower bound, thus being able just to claim that the <span class="math inline">\(95%\)</span> confidence interval is at least as
+old as <span class="math inline">\(7.14\)</span> Ma. The higher the
+confidence level for finding the bounds on the <span class="math inline">\(95%\)</span> confidence interval, the better, in a
+similar way as calculating a <span class="math inline">\(95%\)</span>
+confidence interval is better than calculating a <span class="math inline">\(70%\)</span> confidence interval.</p>
+<p>We can plot these extensions after the oldest occurrence and compare
+the results of both methods:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># calculate the confidence interval on the oldest time using the</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="co"># Strauss-Sadler89 method</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>straussSadlerAndes <span class="ot">&lt;-</span> <span class="fu">stratCI</span>(<span class="at">times=</span>andes, <span class="at">method=</span><span class="st">&quot;Strauss-Sadler89&quot;</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>                              <span class="at">nparams=</span><span class="st">&quot;one.par&quot;</span>, <span class="at">C=</span><span class="fl">0.95</span>, <span class="at">endpoint=</span><span class="st">&quot;first&quot;</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co"># calculate the confidence interval under the distribution-free approach</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>marshallAndes <span class="ot">&lt;-</span> <span class="fu">stratCI</span>(<span class="at">times=</span>andes, <span class="at">method=</span><span class="st">&quot;Marshall94&quot;</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>                         <span class="at">confidence=</span><span class="fl">0.95</span>, <span class="at">quantile=</span><span class="fl">0.8</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="co"># plot the estimations</span></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="fu">hist</span>(andes, <span class="at">probability=</span><span class="cn">TRUE</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">rgb</span>(<span class="at">red=</span><span class="dv">0</span>, <span class="at">green=</span><span class="dv">0</span>, <span class="at">blue=</span><span class="dv">1</span>, <span class="at">alpha=</span><span class="fl">0.3</span>),</span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">main=</span><span class="st">&quot;CIs based on stratigraphic intervals&quot;</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Age (Ma)&quot;</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="co"># plot the lines  for the classical CI estimator of Strauss and Sadler</span></span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a><span class="fu">arrows</span>(<span class="at">x0=</span>straussSadlerAndes[<span class="st">&quot;maxObs&quot;</span>], <span class="at">y0=</span><span class="fl">0.025</span>,</span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>       <span class="at">x1=</span>straussSadlerAndes[<span class="st">&quot;maxEst&quot;</span>], <span class="at">y1=</span><span class="fl">0.025</span>,</span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a>       <span class="at">code=</span><span class="dv">3</span>, <span class="at">angle=</span><span class="dv">90</span>, <span class="at">length=</span><span class="fl">0.1</span>, <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">col=</span><span class="st">&quot;darkblue&quot;</span>)</span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a><span class="co"># plot the lines for the CI estimator of Marshall 94</span></span>
+<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a><span class="fu">arrows</span>(<span class="at">x0=</span>marshallAndes[<span class="dv">1</span>], <span class="at">y0=</span><span class="fl">0.05</span>,</span>
+<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a>       <span class="at">x1=</span>marshallAndes[<span class="dv">2</span>], <span class="at">y1=</span><span class="fl">0.05</span>,</span>
+<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a>       <span class="at">code=</span><span class="dv">3</span>, <span class="at">angle=</span><span class="dv">90</span>, <span class="at">length=</span><span class="fl">0.1</span>, <span class="at">lwd=</span><span class="dv">3</span>, <span class="at">col=</span><span class="st">&quot;darkgreen&quot;</span>)</span>
+<span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a></span>
+<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a><span class="co"># plot a legend</span></span>
+<span id="cb10-27"><a href="#cb10-27" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x=</span><span class="st">&quot;topright&quot;</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;Strauss and Sadler </span><span class="sc">\&#39;</span><span class="st">89&quot;</span>, <span class="st">&quot;Marshall </span><span class="sc">\&#39;</span><span class="st">94&quot;</span>),</span>
+<span id="cb10-28"><a href="#cb10-28" tabindex="-1"></a>       <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;darkblue&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="at">lty=</span><span class="dv">1</span>, <span class="at">lwd=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="footnotes footnotes-end-of-document">
+<hr />
+<ol>
+<li id="fn1"><p>Marshall, C.R. (2010). Using confidence intervals to
+quantify the uncertainty in the end-points of stratigraphic ranges.
+Quantitative Methods in Paleobiology, 16:291-316.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Strauss, D. and Sadler, P.M. (1989). Classical
+confidence intervals and Bayesian probability estimates for ends of
+local taxon ranges. Mathematical Geology, 21(4):411-427.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Marshall, C.R. (1994). Confidence intervals on
+stratigraphic ranges: Partial relaxation of the assumption of randomly
+distributed fossil horizons. Paleobiology, 20(4):459-469.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

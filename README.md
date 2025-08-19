@@ -1,5 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/gaballench/tbea/workflows/R-CMD-check/badge.svg)](https://github.com/gaballench/tbea/actions)
@@ -12,8 +13,8 @@
 
 ## Overview
 
-An R package for pre- and post-processing in phylogenetic and
-divergence-times Bayesian inference. Functions are provided for prior
+An R package for pre- and post-processing in phylogenetic and Bayesian
+inference of divergence times. Functions are provided for prior
 specification in divergence time estimation using fossils as well as
 other kinds of data. It provides tools for interacting with the input
 and output of Bayesian platforms in evolutionary biology such as
@@ -23,7 +24,9 @@ prior and posterior Bayesian densities, as well as code for calculating
 the combination of distributions using conflation of Hill (2008).
 Functions for estimating the origination time in collections of
 distributions using the x-intercept (e.g., Draper and Smith, 1998) and
-stratigraphic intervals (Marshall 2010) are also available.
+stratigraphic intervals (Marshall 2010) are also available. To learn
+more about the package uses, see our [pkgdown
+site](https://gaballench.github.io/tbea/).
 
 Hill, T. 2008. “Conflations of probability distributions”. Transactions
 of the American Mathematical Society, 363:3351-3372.
@@ -53,8 +56,9 @@ This package was created and maintained by Gustavo A. Ballen
 
 Please cite this package as follows:
 
-Ballen, G.A. & Reinales, S. (2024). tbea: tools for pre- and
-post-processing in Bayesian evolutionary analyses. BioRxiv
+Ballen, G.A. & Reinales, S. (2025). tbea: tools for pre- and
+post-processing in Bayesian evolutionary analyses. Evolutionary Journal
+of the Linnean Society
 <https://www.biorxiv.org/content/10.1101/2024.06.18.599561>.
 
 If you use bibtex, use the following entry in your .bib file:
@@ -62,10 +66,10 @@ If you use bibtex, use the following entry in your .bib file:
     @article {Ballen2024.06.18.599561,
         author = {Ballen, Gustavo A. and Reinales, Sandra},
         title = {tbea: tools for pre- and post-processing in Bayesian evolutionary analyses},
-        year = {2024},
+        year = {2025},
         doi = {10.1101/2024.06.18.599561},
         eprint = {https://www.biorxiv.org/content/early/2024/06/19/2024.06.18.599561.full.pdf},
-        journal = {bioRxiv}
+        journal = {Evolutionary Journal of the Linnean Society}
     }
 
 ## Problems?

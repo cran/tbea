@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Gustavo A. Ballen and Sandra Reinales" />
+
+<meta name="date" content="2025-08-19" />
+
+<title>Node calibration specification</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Node calibration specification</h1>
+<h4 class="author">Gustavo A. Ballen and Sandra Reinales</h4>
+<h4 class="date">2025-08-19</h4>
+
+
+
+<p>When using time information associated to a fossil as calibration
+prior, age uncertainty usually come from biostratigraphy (e.g., if no
+radiometric estimate applies closer in the stratigraphic context to the
+fossil locality). Then, it is possible to represent that uncertainity
+using a Uniform distribution with first and last time parameters (e.g.,
+<span class="math inline">\(40.94\)</span> and <span class="math inline">\(41.6\)</span> Ma respectively), or a Lognormal
+distribution with soft bounds. In the second case, we need to find the
+combination of mean and standard deviation that better describes a
+distribution whose density values <span class="math inline">\(0.0\)</span>, <span class="math inline">\(0.5\)</span>, and <span class="math inline">\(0.975\)</span> correspond to the quantiles defined
+by the uniform prior above, in order to use the age information to set a
+calibration point. The function <code>findParams</code> finds such
+combination of parameters for a given pair of quantiles. As the standard
+Lognormal distribution is defined between <span class="math inline">\((0,\infty)\)</span>, we need to apply an offset
+towards the minimum age. This will make it possible to relax the rather
+strong assumption about the node age, because by using a uniform prior
+the probability of observing times with fall outside the interval is
+zero.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># load the package</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(tbea)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># we need to substract the minimum to each quantile</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co"># to offset later</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">findParams</span>(<span class="at">q=</span><span class="fu">c</span>(<span class="fl">40.94-40.94</span>, <span class="fl">41.27-40.94</span>, <span class="fl">41.60-40.94</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>           <span class="at">p=</span><span class="fu">c</span>(<span class="fl">0.0</span>,  <span class="fl">0.50</span>, <span class="fl">0.975</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>           <span class="at">output=</span><span class="st">&quot;complete&quot;</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>           <span class="at">pdfunction=</span><span class="st">&quot;plnorm&quot;</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>           <span class="at">params=</span><span class="fu">c</span>(<span class="st">&quot;meanlog&quot;</span>, <span class="st">&quot;sdlog&quot;</span>),</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>           <span class="at">initVals=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
+<pre><code>## $par
+## [1] -1.1085098  0.3538003
+## 
+## $value
+## [1] 3.501584e-08
+## 
+## $counts
+## function gradient 
+##       89       NA 
+## 
+## $convergence
+## [1] 0
+## 
+## $message
+## NULL</code></pre>
+<p>The function recovers the mean (in log scale) as <span class="math inline">\(-1.1085098\)</span> and the standard deviation as
+<span class="math inline">\(0.3538003\)</span>. We can therefore define
+in <code>Beast2</code> a calibration density <span class="math inline">\(LN(-1.1085098, 0.3538003)\)</span> (setting
+<code>meanInRealSpace</code> to false in <code>beauti</code>) in the
+divergence time estimation analysis. We can further plot the lognormal
+density as it would be used by <code>Beast2</code> with the function
+<code>lognormalBeast</code>; please note that the values from and to are
+counted in units from the offset, not in real scale):</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">lognormalBeast</span>(<span class="sc">-</span><span class="fl">1.1085098</span>, <span class="fl">0.3538003</span>, <span class="at">meanInRealSpace=</span><span class="cn">FALSE</span>,</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>                    <span class="at">offset=</span><span class="fl">40.94</span>, <span class="at">from=</span><span class="dv">0</span>, <span class="at">to=</span><span class="dv">4</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>     <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">main=</span><span class="st">&quot;Node calibration for Hydrolycus&quot;</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Time (Ma)&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>Alternatively, we may prefer to use an exponential distribution
+instead of the lognormal because it relies on just one parameter instead
+of two. The function <code>findParams</code> can be used again to
+estimate prior parameters:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">findParams</span>(<span class="at">q=</span><span class="fu">c</span>(<span class="fl">40.94-40.94</span>, <span class="fl">41.60-40.94</span>),</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>           <span class="at">p=</span><span class="fu">c</span>(<span class="fl">0.0</span>,  <span class="fl">0.975</span>),</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>           <span class="at">output=</span><span class="st">&quot;complete&quot;</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>           <span class="at">pdfunction=</span><span class="st">&quot;pexp&quot;</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>           <span class="at">params=</span><span class="fu">c</span>(<span class="st">&quot;rate&quot;</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>           <span class="at">initVals=</span><span class="fu">c</span>(<span class="dv">1</span>))</span></code></pre></div>
+<pre><code>## $par
+## [1] 5.589202
+## 
+## $value
+## [1] 2.129363e-14
+## 
+## $counts
+## function gradient 
+##       20       19 
+## 
+## $convergence
+## [1] 0
+## 
+## $message
+## NULL</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># plot the calibration density</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dexp</span>((x<span class="fl">-40.94</span>), <span class="at">rate=</span><span class="fl">5.589202</span>), <span class="at">from=</span><span class="fl">40.94</span>, <span class="at">to=</span><span class="dv">43</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>      <span class="at">main=</span><span class="st">&quot;Node calibration for Hydrolycus&quot;</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>      <span class="at">xlab=</span><span class="st">&quot;Time (Ma)&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Density&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>Note that the exponential distribution can be parametrized in terms
+of the scale (<span class="math inline">\(1/\lambda\)</span>, as is the
+case for <code>Beast2</code>) or the rate (<span class="math inline">\(\lambda\)</span>) as used by <code>R</code>.
+Therefore the value to input when defining the prior of an exponential
+distribution in <code>beauti</code> is, which in our case is <span class="math inline">\(1/5.589202 = 5.8\)</span>. When plotting the prior
+in <code>R</code> (e.g. using the function <code>curve</code> as above)
+we need to use <span class="math inline">\(\lambda\)</span> (i.e., <span class="math inline">\(0.17\)</span>) rather than the mean.</p>
+<p>Finally, note that although the function <code>findParams</code>
+gives us the prior parameters to be used as calibration point, when we
+use the uncertainty from the dating of a given fossil as the calibration
+density, we mean the fossil age to be also the node age. This may be a
+strong assumption about the position of the fossil, an then we may want
+to use the fossil just as a lower bound instead, as extensively
+suggested in the literature, e.g., Parham et al. (2012) <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<div class="footnotes footnotes-end-of-document">
+<hr />
+<ol>
+<li id="fn1"><p>Parham, J. et al. (2012). Best practices for justifying
+fossil calibrations. Systematic Biology, 61(2):346-359.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

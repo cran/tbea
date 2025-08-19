@@ -1,6 +1,6 @@
 Package: tbea
 Title: Pre- And Post-Processing in Bayesian Evolutionary Analyses
-Version: 1.6.1
+Version: 1.7.0
 Authors@R: c(person("Gustavo A.", "Ballen", email = "gustavo.a.ballen@gmail.com", role = c("aut", "cre")), 
     person("Sandra", "Reinales", email = "spreinalesl@gmail.com", role = c("aut")))
 Description: Functions are provided for prior specification in divergence time
@@ -22,16 +22,17 @@ Imports: ape, Rfit, boot, graphics, stats, utils, coda
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.1
-URL: https://github.com/gaballench/tbea
+RoxygenNote: 7.3.2
+URL: https://github.com/gaballench/tbea,
+        https://gaballench.github.io/tbea/
 BugReports: https://github.com/gaballench/tbea/issues
-Suggests: testthat (>= 3.0.0), knitr, rmarkdown
+Suggests: testthat (>= 3.0.0), knitr, rmarkdown, Kendall
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2025-04-10 13:52:27 UTC; balleng
+Packaged: 2025-08-19 18:18:46 UTC; balleng
 Author: Gustavo A. Ballen [aut, cre],
   Sandra Reinales [aut]
 Maintainer: Gustavo A. Ballen <gustavo.a.ballen@gmail.com>
 Repository: CRAN
-Date/Publication: 2025-04-10 14:50:02 UTC
+Date/Publication: 2025-08-19 19:10:02 UTC
